@@ -28,7 +28,7 @@ module.exports = async function initApp() {
     const db = connection.db();
     const users = db.collection('users');
     const posts = db.collection('posts');
-    const {session} = userSession(COOKIE_OPTIONS);
+    const {session, store} = userSession(COOKIE_OPTIONS, DB);
 
     const app = express();
     app.set("views", path.join(__dirname, "views"));
@@ -59,6 +59,7 @@ module.exports = async function initApp() {
         return await app.setup();
     };
     app.close = async () => {
+        await store.close();
         await connection.close();
     };
 
