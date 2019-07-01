@@ -19,6 +19,7 @@ const limiter = require('./middleware/rateLimit');
 const csrf = require('csurf')();
 const checkCsrf = require('./middleware/checkCsrf')(csrf);
 const helmet = require('helmet');
+const enforceSsl = require('express-enforces-ssl');
 
 const home = require('./routes/home');
 const addPost = require('./routes/addPost');
@@ -41,6 +42,10 @@ module.exports = async function initApp({uuid}) {
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "hbs");
 
+    if(isProduction) {
+        app.set("trust proxy", true);
+        app.use(enforceSsl());
+    }
     app.use(helmet());
     app.use(session);
     app.use(cookieParser());
