@@ -569,6 +569,14 @@ Relevant test: 'Blind NoSQL injection with a popular password'
 
 This time we find a first user matching regex and use a [popular password](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords).
 
+Temporarily replace one line in production code in routes/login.js:
+```javascript
+// from
+req.session.user = {username: username.split('@')[0]};
+// to
+req.session.user = {username};
+```
+
 Instead of 400 we've just managed to log in to the victim's account.
 
 ## Validate user input [validate_input]

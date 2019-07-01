@@ -287,7 +287,7 @@ describe('Node Security', function() {
             .expect(413, 'request entity too large');
     });
 
-    it.skip('NoSQL injection prevention with sanitization', async function () {
+    it('NoSQL injection prevention with sanitization', async function () {
         await registered(DEFAULT_USER_CREDENTIALS);
         await loginJSON({username: {'$gt': ''}, password: {'$gt': ''}})
             .expect(400, {
