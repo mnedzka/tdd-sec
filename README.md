@@ -237,7 +237,7 @@ Open browser in normal and incognito mode.
 
 In the incognito mode create attacker account.
 
-Log in and log out to obtain session ID.
+Log in to obtain session ID.
 
 In the application tab in Chrome copy session ID.
 
