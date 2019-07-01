@@ -311,9 +311,9 @@ describe('Node Security', function() {
 
     });
 
-    it.skip('Weak password strength not allowed', async function () {
+    it('Weak password strength not allowed', async function () {
         await register({username: DEFAULT_USER_CREDENTIALS.username, password: 'pass'})
-            .expect(400).expect(/Password too week/).expect(/Add another word or two. Uncommon words are better./);
+            .expect(400).expect(/Password too weak/).expect(/Add another word or two. Uncommon words are better./);
     });
 
     it.skip('JSON pollution in register', async function () {
