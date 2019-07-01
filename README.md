@@ -679,11 +679,6 @@ What if our input JSON is null or some other primitive value?
 
 'JSON pollution in register' and 'JSON pollution in login' have those cases covered.
 
-JSON body parser by default is in so-called [strict mode](https://github.com/expressjs/body-parser#strict)
-and only allows for objects and arrays.
-But once we get and object and array we need to exclude those since we expect
-a string. validator.js works on strings.
-
 input/validateCredentials.js
 ```javascript
 function validateCredentials({username, password}) {
@@ -696,9 +691,12 @@ function validateCredentials({username, password}) {
 }
 ```
 
-Note: when using query params or HTML forms we can also
+Note 1: when using query params or HTML forms we can also
 prepare non string input by sending same param multiple times.
-It's then parsed by express and an array.
+It's then parsed by express as an array.
+
+Note 2: JSON body parser by default is in so-called [strict mode](https://github.com/expressjs/body-parser#strict)
+and only allows for objects and arrays.
 
 ## Input validation with schema validators [schema_validator]
 
