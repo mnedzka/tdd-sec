@@ -43,13 +43,15 @@ module.exports = async function initApp() {
     app.use(bodyParser.json());
     app.use(express.static(__dirname + '/public'));
 
-    app.get('/', home(posts));
+    const renderListPage = home(posts);
+
+    app.get('/', (req, res) => renderListPage(null, req, res));
     app.get('/register', (req, res) => res.render('register'));
     app.post('/register', register(users));
     app.get('/login', (req, res) => res.render('login'));
     app.post('/login', limiter(), login({users, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
     app.get('/logout', logout);
-    app.post('/post', isAuthenticated, addPost(posts));
+    app.post('/post', isAuthenticated, addPost({posts, renderListPage}));
 
     app.use(error);
 

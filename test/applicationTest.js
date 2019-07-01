@@ -358,7 +358,7 @@ describe('Node Security', function() {
         await loginJSON(false).expect(400, "Unexpected token f in JSON at position 0");
     });
 
-    it.skip('Post validation with JSON schema', async function () {
+    it('Post validation with JSON schema', async function () {
         const cookies = await user();
 
         await post({cookies, msg: ''}).expect(400, /Please use between 1 and 140 characters/);

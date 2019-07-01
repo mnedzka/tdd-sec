@@ -754,6 +754,7 @@ renderListPage is a function we inject to render the same page that triggered
 the request.
 
 Where does renderListPage come from?
+
 routes/home.js
 ```javascript
 const home = posts => async function renderListPage(error, req, res) {
