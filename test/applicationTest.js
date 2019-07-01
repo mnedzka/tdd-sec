@@ -410,7 +410,7 @@ describe('Node Security', function() {
         await postJSON({cookies: {}, csrfToken, msg: 'irrelevant'}).expect(400);
     });
 
-    it.skip('CSRF protection with SameSite cookies', async function () {
+    it('CSRF protection with SameSite cookies', async function () {
         const cookies = await user();
 
         assert.deepStrictEqual(cookies[SESSION_COOKIE_NAME].sameSite, 'Strict');
