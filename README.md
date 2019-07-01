@@ -420,9 +420,9 @@ app.js
 ```javascript
 const JWT_SECRET = process.env.JWT_SECRET || 'jwtsecret';
 
-app.post('/login', limiter(), login({users, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}))
+app.post('/login', limiter(), login({users, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
 ```
-We' need to change the signature of login to inject jwtSecret and cookieOptions.
+We'll need to change the signature of login to inject jwtSecret and cookieOptions.
 
 routes/login.js
 ```javascript
