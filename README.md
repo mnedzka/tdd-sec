@@ -162,7 +162,7 @@ views/home.hbs
 ```
 
 Try to post this message:
-<b>bold</b><i>italic</i><p>paragraph</p><script>x=1</script>
+```<b>bold</b><i>italic</i><p>paragraph</p><script>x=1</script>```
 
 Same action is captured in a test called 'Whitelist allowed HTML tags'.
 

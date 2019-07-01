@@ -2,6 +2,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const hbs = require('hbs');
 const path = require('path');
+require('./output/sanitizeHtml')(hbs);
 
 const DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/node-security';
 
