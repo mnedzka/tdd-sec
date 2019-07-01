@@ -189,7 +189,7 @@ describe('Node Security', function() {
         await invalidLogin();
     });
 
-    it.skip('Rate limit', async function () {
+    it('Rate limit', async function () {
         for (let i = 0; i < 10; ++i) {
             await invalidLogin();
         }
