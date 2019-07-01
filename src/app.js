@@ -18,6 +18,7 @@ const userSession = require('./middleware/session');
 const limiter = require('./middleware/rateLimit');
 const csrf = require('csurf')();
 const checkCsrf = require('./middleware/checkCsrf')(csrf);
+const helmet = require('helmet');
 
 const home = require('./routes/home');
 const addPost = require('./routes/addPost');
@@ -40,6 +41,7 @@ module.exports = async function initApp({uuid}) {
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "hbs");
 
+    app.use(helmet());
     app.use(session);
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: false}));
