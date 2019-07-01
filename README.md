@@ -1245,7 +1245,6 @@ Try to change integrity value and see what happens in your browser.
 
 We can also modify our CSP to require SRI:
 ```javascript
-app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: ["'self'"],
@@ -1253,7 +1252,6 @@ app.use(
             requireSriFor: ['style']
         }
     })
-);
 ```
 
 As of this writing Chrome has this check disabled behind a flag while

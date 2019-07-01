@@ -4,6 +4,7 @@ module.exports = helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
         styleSrc: ['https://cdnjs.cloudflare.com'],
-        upgradeInsecureRequests: true
+        upgradeInsecureRequests: true,
+        requireSriFor: ['style']
     }
 });
