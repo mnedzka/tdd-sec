@@ -844,7 +844,7 @@ Start our website (localhost:3000) and log in as a genuine user.
 Now go to localhost:3001 and open 'Basic CSRF' link and submit a form.
 Attacker embedded a form to our genuine website on its website.
 
-To see a more subtle attack that requires nothing by opening a link go to
+To see a more subtle attack that requires nothing but opening a link go to
 a 'Script CSRF' link. This time JS submits the form with no user action.
 But it's still evident that the attack happened because we're being redirected
 to the genuine page.
