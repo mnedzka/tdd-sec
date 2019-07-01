@@ -16,6 +16,7 @@ const cookieParser = require('cookie-parser');
 const isAuthenticated = require('./middleware/authentication')(JWT_SECRET);
 const userSession = require('./middleware/session');
 const limiter = require('./middleware/rateLimit');
+const csrf = require('csurf')();
 
 const home = require('./routes/home');
 const addPost = require('./routes/addPost');
@@ -46,13 +47,13 @@ module.exports = async function initApp() {
 
     const renderListPage = home(posts);
 
-    app.get('/', (req, res) => renderListPage(null, req, res));
+    app.get('/', csrf, (req, res) => renderListPage(null, req, res));
     app.get('/register', (req, res) => res.render('register'));
     app.post('/register', register(users));
     app.get('/login', (req, res) => res.render('login'));
     app.post('/login', limiter(), login({users, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
     app.get('/logout', logout);
-    app.post('/post', isAuthenticated, addPost({posts, renderListPage}));
+    app.post('/post', isAuthenticated, csrf, addPost({posts, renderListPage}));
 
     app.use(error);
 

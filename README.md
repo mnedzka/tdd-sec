@@ -858,6 +858,7 @@ Let those two tests guide our implementation:
 'CSRF token generation', 'Reject requests without CSRF token'.
 
 We want CSRF token to be added to the POST submission form.
+
 app.js
 ```javascript
 const csrf = require('csurf')();
@@ -884,20 +885,22 @@ views/home.hbs
 At this point 'CSRF token generation' should go green.
 
 Now back to app.js
-```
+```javascript
 app.post('/post', isAuthenticated, csrf, addPost({posts, renderListPage}));
 ```
 Same csrf middleware applied to POST requests will check if CSRF token
 is valid.
 This should be enough to make 'Reject requests without CSRF token' green.
 
-Check all other tests. Fix broken tests.
+Check all other tests and fix broken ones.
+
 Hint:
 ```javascript
 const {cookies, csrfToken} = await userWithCSRFToken();
 
 await post({cookies, csrfToken, msg});
 ```
+
 For now we can skip 'Basic register/login/post/read posts flow happy path for SPA'.
 We'll fix it later.
 
