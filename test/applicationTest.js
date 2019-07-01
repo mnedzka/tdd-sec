@@ -305,7 +305,7 @@ describe('Node Security', function() {
             });
     });
 
-    it.skip('Only email allowed for username', async function () {
+    it('Only email allowed for username', async function () {
         await register({username: 'mark', password: 'pass'})
             .expect(400).expect(/Username is invalid/).expect(/Please use email address/);
 
