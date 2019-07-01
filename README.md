@@ -510,9 +510,11 @@ due to several things you have to implement yourself:
 * keeping tokens alive and refreshing them
 * revoking access by blacklisting some tokens
 * logout is tricky since tokens have expiry date
+
 Cookies are much simpler and just work out of the box.
 
 More:
+
 http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/
 http://cryto.net/~joepie91/blog/2016/06/19/stop-using-jwt-for-sessions-part-2-why-your-solution-doesnt-work/
 
