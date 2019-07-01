@@ -20,6 +20,7 @@ const csrf = require('csurf')();
 const checkCsrf = require('./middleware/checkCsrf')(csrf);
 const helmet = require('helmet');
 const enforceSsl = require('express-enforces-ssl');
+const csp = require('./middleware/csp');
 
 const home = require('./routes/home');
 const addPost = require('./routes/addPost');
@@ -47,6 +48,7 @@ module.exports = async function initApp({uuid}) {
         app.use(enforceSsl());
     }
     app.use(helmet());
+    app.use(csp);
     app.use(session);
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: false}));

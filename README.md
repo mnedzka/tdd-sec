@@ -1184,14 +1184,12 @@ was not loaded.
 
 Let's whitelist all CSS from our CDN:
 ```javascript
-app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: ["'self'"],
             styleSrc: ['https://cdnjs.cloudflare.com'],
         }
     })
-);
 ```
 
 Check if the CSS got applies this time.
