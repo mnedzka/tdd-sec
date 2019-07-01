@@ -966,7 +966,7 @@ const checker = csrf => function checkCsrf(req, res, next) {
 
 module.exports = checker;
 ```
-Our enhances CSRF checker for POST requests is now enhanced
+Our enhanced CSRF checker for POST requests is now enhanced
 with csrf-token header checking.
 
 app.js

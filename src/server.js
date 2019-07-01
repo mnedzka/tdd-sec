@@ -1,5 +1,6 @@
 require('dotenv').config();
-const initApp = require('./app');
+const uuid = require('uuid/v4');
+const initApp = require('./app')({uuid});
 
 const PORT = process.env.PORT || 3000;
 (async function main() {

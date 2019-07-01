@@ -17,6 +17,7 @@ const isAuthenticated = require('./middleware/authentication')(JWT_SECRET);
 const userSession = require('./middleware/session');
 const limiter = require('./middleware/rateLimit');
 const csrf = require('csurf')();
+const checkCsrf = require('./middleware/checkCsrf')(csrf);
 
 const home = require('./routes/home');
 const addPost = require('./routes/addPost');
@@ -26,7 +27,7 @@ const register = require('./routes/register');
 const error = require('./errors/error');
 
 
-module.exports = async function initApp() {
+module.exports = async function initApp({uuid}) {
     const connection = await MongoClient.connect(DB, {
         bufferMaxEntries: 0, useNewUrlParser: true
     });
@@ -51,9 +52,9 @@ module.exports = async function initApp() {
     app.get('/register', (req, res) => res.render('register'));
     app.post('/register', register(users));
     app.get('/login', (req, res) => res.render('login'));
-    app.post('/login', limiter(), login({users, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
+    app.post('/login', limiter(), login({users, uuid, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
     app.get('/logout', logout);
-    app.post('/post', isAuthenticated, csrf, addPost({posts, renderListPage}));
+    app.post('/post', isAuthenticated, checkCsrf, addPost({posts, renderListPage}));
 
     app.use(error);
 

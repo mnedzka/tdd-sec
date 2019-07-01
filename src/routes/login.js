@@ -4,7 +4,7 @@ const {UNAUTHORIZED, BAD_REQUEST} = require('../statusCodes');
 const validateCredentials = require('../input/validateCredentials');
 const jwt = require('jsonwebtoken');
 
-const login = ({users, jwtSecret, cookieOptions}) => async (req, res) => {
+const login = ({users, uuid, jwtSecret, cookieOptions}) => async (req, res) => {
     const {username, password} = req.body;
 
     const error = validateCredentials({username, password});
@@ -13,7 +13,9 @@ const login = ({users, jwtSecret, cookieOptions}) => async (req, res) => {
     const user = await users.findOne({username});
 
     if (user && await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({username}, jwtSecret, {expiresIn: '1h'});
+        const csrf = uuid();
+        const token = jwt.sign({username, 'csrf-token': csrf}, jwtSecret, {expiresIn: '1h'});
+        res.set('csrf-token', csrf);
         res.cookie('jwt', token, {...cookieOptions, maxAge: 1 * 60 * 1000});
 
         req.session.regenerate(function(err) {
