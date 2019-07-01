@@ -268,7 +268,7 @@ describe('Node Security', function() {
         assert.ok(jwtCookie.maxAge, 60);
     });
 
-    it.skip('Basic register/login/post/read posts flow happy path for SPA', async function () {
+    it('Basic register/login/post/read posts flow happy path for SPA', async function () {
         await registerJSON(DEFAULT_USER_CREDENTIALS).expect(200, '"Registered"');
         const loginResponse = await loginJSON(DEFAULT_USER_CREDENTIALS).expect(200, '"Success"');
         const {jwt} = extractSetCookies(loginResponse);

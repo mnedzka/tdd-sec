@@ -11,7 +11,8 @@ const DB = process.env.MONGODB_URI || 'mongodb://localhost:27017/node-security';
 const JWT_SECRET = process.env.JWT_SECRET || 'jwtsecret';
 
 const bodyParser = require('body-parser');
-const isAuthenticated = require('./middleware/authentication')();
+const cookieParser = require('cookie-parser');
+const isAuthenticated = require('./middleware/authentication')(JWT_SECRET);
 const userSession = require('./middleware/session');
 const limiter = require('./middleware/rateLimit');
 
@@ -36,6 +37,7 @@ module.exports = async function initApp() {
     app.set("view engine", "hbs");
 
     app.use(session);
+    app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
     app.use(express.static(__dirname + '/public'));
