@@ -1,10 +1,14 @@
 const bcrypt = require('bcryptjs');
 const userErrorPage = require('../errors/userErrorPage');
-const {UNAUTHORIZED} = require('../statusCodes');
+const {UNAUTHORIZED, BAD_REQUEST} = require('../statusCodes');
+const validateCredentials = require('../input/validateCredentials');
 const jwt = require('jsonwebtoken');
 
 const login = ({users, jwtSecret, cookieOptions}) => async (req, res) => {
     const {username, password} = req.body;
+
+    const error = validateCredentials({username, password});
+    if (error) return userErrorPage('login', res.status(BAD_REQUEST), error);
 
     const user = await users.findOne({username});
 
@@ -13,7 +17,7 @@ const login = ({users, jwtSecret, cookieOptions}) => async (req, res) => {
         res.cookie('jwt', token, {...cookieOptions, maxAge: 1 * 60 * 1000});
 
         req.session.regenerate(function(err) {
-            req.session.user = {username};
+            req.session.user = {username: username.split('@')[0]};
             res.format({
                 'text/html'() {
                     res.redirect('/');
