@@ -3,6 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 const hbs = require('hbs');
 const path = require('path');
 require('./output/sanitizeHtml')(hbs);
+require('./output/encodeURL')(hbs);
 
 const ENV = process.env.NODE_ENV || 'development';
 const isProduction = ENV.toLowerCase() === 'production';

@@ -368,7 +368,7 @@ describe('Node Security', function() {
         await postJSON({cookies, msg: {}}).expect(400, /Please use between 1 and 140 characters/);
     });
 
-    it.skip('Context aware XSS', async function () {
+    it('Context aware XSS', async function () {
         const cookies = await user();
 
         await post({cookies, msg: 'javascript:alert(1)'});
