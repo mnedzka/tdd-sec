@@ -500,7 +500,7 @@ describe('Node Security', function() {
         await request.get('/callback?code=HACKED&state=HACKED').expect(401, /Authentication with Github failed/);
     });
 
-    it.skip('Prevent DoS with password limit', async function () {
+    it('Prevent DoS with password limit', async function () {
         this.timeout(2000);
         const veryBigData = times(1000, 'A');
         const bigData = times(129, 'A');
@@ -510,7 +510,7 @@ describe('Node Security', function() {
         await register({username: DEFAULT_USER_CREDENTIALS.username, password: bigData})
             .expect(400, /Please use a password up to 128 characters/);
         await register({username: DEFAULT_USER_CREDENTIALS.username, password: mediumData})
-            .expect(400, /Password too week/);
+            .expect(400, /Password too weak/);
     });
 
 });
