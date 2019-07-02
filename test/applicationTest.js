@@ -457,7 +457,7 @@ describe('Node Security', function() {
         };
     }
 
-    it.skip('OAuth2: exchange code for token', async function () {
+    it('OAuth2: exchange code for token', async function () {
         githubOauth.getToken = args => {
             githubOauth.getToken.invokedWith = args;
             return Promise.resolve({access_token: 'token_to_github_api'});

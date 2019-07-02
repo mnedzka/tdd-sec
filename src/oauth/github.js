@@ -6,7 +6,8 @@ const GITHUB_OAUTH_CREDENTIALS = {
     },
     auth: {
         tokenHost: 'https://github.com',
-        authorizePath: '/login/oauth/authorize'
+        authorizePath: '/login/oauth/authorize',
+        tokenPath: '/login/oauth/access_token'
     }
 };
 const OAUTH2_CALLBACK_URI = process.env.OAUTH2_CALLBACK_URI || 'http://localhost:3000/callback';
@@ -18,5 +19,6 @@ const authorizationUri = githubOauth.authorizationCode.authorizeURL({
 });
 
 module.exports = {
-    authorizationUri
+    authorizationUri,
+    getToken: code => githubOauth.authorizationCode.getToken(code)
 };
