@@ -478,7 +478,7 @@ describe('Node Security', function() {
         assert.deepStrictEqual(githubOauth.getToken.invokedWith, OAUTH_CODE);
     });
 
-    it.skip('OAuth2: provider error', async function () {
+    it('OAuth2: provider error', async function () {
         githubOauth.getToken = args => {
             githubOauth.getToken.invokedWith = args;
             return Promise.reject("Github error");
