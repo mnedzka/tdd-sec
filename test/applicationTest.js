@@ -468,7 +468,7 @@ describe('Node Security', function() {
         assert.deepStrictEqual(githubOauth.getToken.invokedWith, OAUTH_CODE);
     });
 
-    it.skip('OAuth2: incorrect or expired code', async function () {
+    it('OAuth2: incorrect or expired code', async function () {
         githubOauth.getToken = args => {
             githubOauth.getToken.invokedWith = args;
             return Promise.resolve({error: 'bad_verification_code'});

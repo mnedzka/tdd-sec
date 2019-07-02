@@ -1452,10 +1452,10 @@ const callback = async (req, res) => {
 
 Test it with 'OAuth2: exchange code for token' and manually in your browser.
 
-If you don't see 'github user' in the browser after github redirect to out page
-refresh the page. We'll fix it later.
+If you don't see 'github user' in the browser after github redirect to our page
+, refresh the page. We'll fix it later.
 
-### Unhappy path: incorrect or expired token [oauth_incorrect_code]
+### Unhappy path: incorrect or expired code [oauth_incorrect_code]
 
 Run this test: 'OAuth2: incorrect or expired code'
 
