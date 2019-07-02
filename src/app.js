@@ -27,10 +27,11 @@ const addPost = require('./routes/addPost');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const register = require('./routes/register');
+const github = require('./routes/github');
 const error = require('./errors/error');
 
 
-module.exports = async function initApp({uuid}) {
+module.exports = async function initApp({uuid, githubOauth}) {
     const connection = await MongoClient.connect(DB, {
         bufferMaxEntries: 0, useNewUrlParser: true
     });
@@ -38,6 +39,7 @@ module.exports = async function initApp({uuid}) {
     const users = db.collection('users');
     const posts = db.collection('posts');
     const {session, store} = userSession(COOKIE_OPTIONS, DB);
+    const {auth} = github({githubOauth, uuid});
 
     const app = express();
     app.set("views", path.join(__dirname, "views"));
@@ -64,6 +66,7 @@ module.exports = async function initApp({uuid}) {
     app.post('/login', limiter(), login({users, uuid, jwtSecret: JWT_SECRET, cookieOptions: COOKIE_OPTIONS}));
     app.get('/logout', logout);
     app.post('/post', isAuthenticated, checkCsrf, addPost({posts, renderListPage}));
+    app.get('/auth', auth);
 
     app.use(error);
 
