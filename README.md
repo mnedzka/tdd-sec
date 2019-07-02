@@ -1505,7 +1505,9 @@ const callback = async (req, res) => {
 
 Imagine the scenario where the attacker obtains his authorization code
 from Github but doesn't exchange it for the token.
+
 Instead he creates a link to the callback: /callback?code=ATTACKERS_CODE
+
 Then he either sends you a link in an email or in the img tag etc.
 You open the link and now you're talking to Github with the attackers token.
 
