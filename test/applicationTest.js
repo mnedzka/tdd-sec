@@ -510,7 +510,7 @@ describe('Node Security', function() {
         await register({username: DEFAULT_USER_CREDENTIALS.username, password: bigData})
             .expect(400, /Please use a password up to 128 characters/);
         await register({username: DEFAULT_USER_CREDENTIALS.username, password: mediumData})
-            .expect(400, /Password too week/);
+            .expect(400, /Password too weak/);
     });
 
 });
