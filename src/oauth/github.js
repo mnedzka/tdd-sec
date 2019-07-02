@@ -21,5 +21,5 @@ const authorizationUri = state => githubOauth.authorizationCode.authorizeURL({
 
 module.exports = {
     authorizationUri,
-    getToken: code => githubOauth.authorizationCode.getToken(code)
+    getToken: code => githubOauth.authorizationCode.getToken({code})
 };
