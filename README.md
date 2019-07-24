@@ -1746,3 +1746,4 @@ Remember not to put any sensitive data into the URLs.
 * [Pluralsight: Securing Your Node.js Web App](https://app.pluralsight.com/library/courses/securing-node-js-web-app/table-of-contents)
 * [Packt: Node Cookbook](https://www.packtpub.com/web-development/node-cookbook-third-edition)
 * [O'Reilly: Identity and Data Security for Web Development](http://shop.oreilly.com/product/0636920044376.do)
+* https://github.com/shieldfy/API-Security-Checklist
