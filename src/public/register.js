@@ -1,4 +1,4 @@
-document.querySelector(".js-form").addEventListener("submit", function register(e) {
+document.querySelector(".js-form") && document.querySelector(".js-form").addEventListener("submit", function register(e) {
     e.preventDefault();
     fetch("/register", {
         method: "POST",
