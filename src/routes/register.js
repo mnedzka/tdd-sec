@@ -7,7 +7,7 @@ const register = users => async (req, res) => {
     try {
         await users.insertOne({username, password});
     } catch(e) {
-        return userErrorPage('register', res.status(BAD_REQUEST), {error: "User already exists"});
+        return userErrorPage('register', res.status(BAD_REQUEST), {error: e});
     }
     res.format({
         'text/html'() {
